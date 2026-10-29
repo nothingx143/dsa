@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* link;
+};
+
+typedef struct Queue {
+    struct Node *front, *rear;
+} Queue;
+
+void enQueue(Queue* q,int value) {
+    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+    temp->data = value;
+    temp->link = NULL;
+    if (q->front == NULL) {
+        q->front = temp;
+    } else {
+        q->rear->link = temp;
+    }
+    q->rear = temp;
+    q->rear->link = q->front;
+}
+
+int deQueue(Queue* q) {
+    int val = q->front->data;
+    if (q->front == q->rear) {
+        q->front = q->rear = NULL;
+    } else {
+        struct Node* temp = q->front;
+        q->front = q->front->link;
+        q->rear->link = q->front;
+        free(temp);
+    }
+    return val;
+}
+
+void displayQueue(struct Queue* q) {
+    struct Node* temp = q->front;
+    printf("Elements in Circular Queue are:");
+    while (temp->link != q->front) {
+        printf("%d ", temp->data);
+        temp = temp->link;
+    }
+    printf("%d\n", temp->data);
+}
+
+int main() {
+    Queue* q = (Queue*)malloc(sizeof(Queue));
+    q->front = q->rear = NULL;
+    int n, val;
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &val);
+        enQueue(q, val);
+    }
+    displayQueue(q);
+    printf("Deleted value = %d\n", deQueue(q));
+    printf("Deleted value = %d", deQueue(q));
+    displayQueue(q);
+    return 0;
+}
+

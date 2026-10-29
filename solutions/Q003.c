@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+static int pos[26][100005], count[26];
+
+int findmax(int* Count) {
+    int max = Count[0];
+    for (int i = 1; i < 26; i++)
+        if (Count[i] > max) max = Count[i];
+    return max;
+}
+
+int min_val(int a, int b) {
+    if (a < b) return a;
+    return b;
+}
+
+int can_form(int* p, int m, int k) {
+    for (int i = 0; i <= m - k; i++)
+        if (p[i + k - 1] - p[i] <= 2 * k) return 1;
+    return 0;
+}
+
+int solve_for_char(int* p, int m, int n) {
+    for (int k = m; k >= 1; k--)
+        if (can_form(p, m, k)) return min_val(n, 2 * k + 1);
+    return 0;
+}
+
+void fill_positions(char* s, int n) {
+    for (int i = 0; i < n; i++)
+        pos[s[i] - 'a'][count[s[i] - 'a']++] = i;
+}
+
+void compute_answers(int n, int* Count) {
+    for (int c = 0; c < 26; c++)
+        Count[c] = solve_for_char(pos[c], count[c], n);
+}
+
+int main() {
+    int T, n, Count[26];
+    if (scanf("%d", &T) != 1) return 0;
+    while (T--) {
+        scanf("%d", &n);
+        char* s = (char*)malloc(n + 5);
+        scanf("%s", s);
+        memset(count, 0, sizeof(count));
+        fill_positions(s, n);
+        compute_answers(n, Count);
+        printf("%d\n", findmax(Count));
+        free(s);
+    }
+    return 0;
+}

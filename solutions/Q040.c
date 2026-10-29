@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct n {
+    int data;
+    struct n *next;
+};
+
+struct n *head = NULL;
+struct n *last = NULL;
+
+void append_node(struct n **h, struct n **l, int val) {
+    struct n *temp = (struct n *)malloc(sizeof(struct n));
+    temp->data = val;
+    if (*h == NULL) {
+        *h = temp;
+        temp->next = *h;
+        *l = temp;
+    } else {
+        (*l)->next = temp;
+        temp->next = *h;
+        *l = temp;
+    }
+}
+
+void insert(int data) {
+    append_node(&head, &last, data);
+}
+
+void display(struct n *h) {
+    if (h == NULL) return;
+    struct n *temp = h;
+    printf("[h]");
+    do {
+        printf("=>%d", temp->data);
+        temp = temp->next;
+    } while (temp != h);
+    printf("=>[h]\n");
+}
+
+void build_even_odd(int n, struct n **o_h, struct n **e_h) {
+    struct n *o_l = NULL;
+    struct n *e_l = NULL;
+    for (int i = 1; i <= n; i += 2) {
+        append_node(o_h, &o_l, i);
+    }
+    for (int i = 2; i <= n; i += 2) {
+        append_node(e_h, &e_l, i);
+    }
+}
+
+int main() {
+    int n;
+    struct n *odd_head = NULL;
+    struct n *even_head = NULL;
+    if (scanf("%d", &n) != 1) return 0;
+    for (int i = 1; i <= n; i++) {
+        insert(i);
+    }
+    printf("Complete linked_list:\n");
+    display(head);
+    build_even_odd(n, &odd_head, &even_head);
+    printf("Odd:\n");
+    display(odd_head);
+    printf("Even:\n");
+    display(even_head);
+    return 0;
+}
+

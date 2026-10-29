@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+
+char s[1000005], ans[1000005];
+int P[1000005], count[128], start_pos[128];
+
+int main() {
+    if (scanf("%s", s) != 1) return 0;
+    int len = strlen(s), n = len - 1, i, sum = 0, curr = 0, k = 0;
+    for(i=0;i<=n;i++) count[(unsigned char)s[i]]++;
+    for (int c = 0; c < 128; c++) {
+        start_pos[c] = sum;
+        sum += count[c];
+    }
+    for(i=0;i<=n;i++) {
+        P[start_pos[(unsigned char)s[i]]++] = i;
+        if (s[i] == '#') curr = i;
+    }
+    curr = P[curr];
+    while (s[curr] != '#') {
+        ans[k++] = s[curr];
+        curr = P[curr];
+    }
+    ans[k] = '\0';
+    printf("%s\n", ans);
+    return 0;
+}
+

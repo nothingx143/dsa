@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define FOR_LOOP(i, n) for (int i = 0; i < n; i++)
+#define WHILE_LOOP(cond) while (cond)
+#define COND(a, b, c) (a ? b : c)
+
+typedef struct node {
+    int data;
+    struct node* next;
+} node;
+
+typedef struct mystack {
+    node* top;
+} mystack;
+
+void push(int data, mystack* ms) {
+    node* temp = (node*)malloc(sizeof(node));
+    temp->data = data;
+    temp->next = ms->top;
+    ms->top = temp;
+}
+
+int pop(mystack* ms) {
+    node* temp = ms->top;
+    int val = temp->data;
+    ms->top = ms->top->next;
+    free(temp);
+    return val;
+}
+
+void merge(mystack* ms1, mystack* ms2) {
+    node* curr = ms1->top;
+    WHILE_LOOP(curr->next) curr = curr->next;
+    curr->next = ms2->top;
+}
+
+int main() {
+    int n, m, x;
+    scanf("%d %d", &n, &m);
+    mystack ms1 = {NULL}, ms2 = {NULL};
+    FOR_LOOP(i, n) {
+        scanf("%d", &x);
+        push(x, &ms1);
+    }
+    FOR_LOOP(i, m) {
+        scanf("%d", &x);
+        push(x, &ms2);
+    }
+    merge(&ms1, &ms2);
+    WHILE_LOOP(ms1.top) {
+        printf("%d%s", pop(&ms1), COND(ms1.top, " ", ""));
+    }
+    printf("\n");
+    return 0;
+}
+
