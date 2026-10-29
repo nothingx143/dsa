@@ -1,5 +1,7 @@
 # DSA Solutions Index
 
+> **Total Questions Solved (100% Pass):** 54 / 60
+
 | # | Question ID | Session | Problem Title | Language | Documentation | Source Code |
 | :-: | :---: | :--- | :--- | :---: | :---: | :---: |
 | 01 | **Q001** | Searching | Train Route Scheduling / Latest Start Day | C | [Documentation](solutions/Q001.md) | [Source Code](solutions/Q001.c) |
@@ -56,3 +58,20 @@
 | 58 | **Q058** | Queue | Queue Enqueue Step-by-Step State Display | C | [Documentation](solutions/Q058.md) | [Source Code](solutions/Q058.c) |
 | 59 | **Q059** | Queue | Bit Inversions / Longest Substring Segment Tree | C | [Documentation](solutions/Q059.md) | [Source Code](solutions/Q059.c) |
 | 60 | **Q060** | Queue | Count Distinct Subsequences Modulo 10^9+7 | C | [Documentation](solutions/Q060.md) | [Source Code](solutions/Q060.c) |
+
+<br>
+
+<details>
+<summary><b>Unsolved / Skipped Questions (6)</b></summary>
+<br>
+
+| # | Question ID | Session | Problem Title / Topic | Status |
+| :-: | :---: | :--- | :--- | :---: |
+| 20 | **Q020** | Sorting | Divisibility Pairing after Sorting | Unsolved |
+| 29 | **Q029** | Arrays | K Pairs with Smallest Sums | Unsolved |
+| 32 | **Q032** | Linked List | Circular Linked List Deletion / Insertion | Unsolved |
+| 33 | **Q033** | Linked List | Linked List Node Deletion by Position | Unsolved |
+| 34 | **Q034** | Linked List | Singly Linked List Search & Reorganization | Unsolved |
+| 35 | **Q035** | Linked List | Doubly Linked List Insert at Head | Unsolved |
+
+</details>
